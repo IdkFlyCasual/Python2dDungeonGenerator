@@ -1,0 +1,86 @@
+
+//////////////////////    Success!!!    //////////////////////////
+{
+need rooms to generate starting from a rondom index in 2d array
+
+1 decide random start index.
+    start idx = random(from 0 to end of array - maximum size of room)
+2 decide random width and height;
+    width = random(from start to col end)
+    height = random(from start to row end)
+}
+//////////////////////    Success!!!    //////////////////////////
+
+
+
+//////////////////    this is going well!!!    ///////////////
+now lets back up code and try to make sure the rooms dont overlap
+//////////////////    this is going well!!!    ///////////////
+
+
+
+///////////////////   Adversity !!!!!    /////////////////////////
+time to find a way to draw halways between rooms
+
+also should find a way to measure and store the rooms as variables for various 
+shit like style, scatter n such {might be harder than i thought}
+
+also should back this up before i enevitably break it.
+///////////////////////    Adversity !!!!   //////////////////////////
+
+
+
+/////////////////////////////    NOICE !!!    ////////////////////////////////////
+managed to get center coords of every room spawned
+now lets try to go through tha cor array and draw a line to nearest neihbor 
+coords. 
+
+hopfully ill be able to control it enough to keep 
+from ruining large rooms with islands or L corners
+
+managed to find some paths to draw. well see how this goes
+//////////////////////////////    NOICE !!!    /////////////////////////////////////
+
+
+////////////////////////////////// FAIL ////////////////////////////////////
+
+drawing hallways with some control
+should try to find a way to join the booled rooms into one
+for walkpoint coords
+
+wont be able to keep it klean otherwise
+take all room points and merg them if all cells between them
+are floor cells altering the array of points
+
+
+have the math figured out i think, the problem is crossing beams
+between loops and the maths...
+
+mayhaps if i clone the point array and remove from that one then join 
+the remaining with the new coords and finaly assign it to
+the origonal point array.
+
+////////////////////////////////////////////////////////////////////////////
+
+
+
+start by colapsisng coords by a min distance
+then see if path between is all floors, if so colapse A and B
+
+also need to add conditionals for 45 deg walls and doors.. we'll worry about scatter
+later... probably waaaay later at this point if i dont start asking the basalisk for help
+
+
+asked the basalisk lol
+
+
+///////////////////////////////////// fail ///////////////////////////////////////
+
+
+too many halls still so thats what we should be focusing on.
+once we handle that we will probably make a single py file
+and contain every thing in one file, add heavy notes
+then have the basalisk make me a cleaned up version and
+do some learning comparing the changes at this point
+ill probably make a git repository... really need to start
+"keeping my garden green".
