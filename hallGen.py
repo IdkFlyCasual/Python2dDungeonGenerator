@@ -15,19 +15,12 @@ def checkPath(arr):
     paths = []
     i = 0
     while i < len(arr) -1:
-        for j in range(i, len(arr)):
+        for j in range(0, len(arr)):
 
             #check distance between walking points
             if j != i:
-                # if abs(arr[i][0] - arr[j][0]) > 45 and abs(arr[i][1] - arr[j][1]) > 45:
-                #     path = []
 
-                #     path.append([arr[i][0], arr[j][0]])
-
-                #     path.append([arr[i][1], arr[j][1]])
-
-                #     paths.append(path)------
-                if abs(arr[i][0] - arr[j][0]) < 30 and abs(arr[i][1] - arr[j][1]) < 30 and abs(arr[i][0] - arr[j][0]) > 10 and abs(arr[i][1] - arr[j][1]) > 10:
+                if abs(arr[i][0] - arr[j][0]) < 30 and abs(arr[i][1] - arr[j][1]) < 30 and abs(arr[i][0] - arr[j][0]) > 20 and abs(arr[i][1] - arr[j][1]) > 20:
                     path = []
 
                     path.append([arr[i][0], arr[j][0]])
