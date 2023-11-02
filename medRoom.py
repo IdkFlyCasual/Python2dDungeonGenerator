@@ -1,7 +1,16 @@
 
+# medRoom.py
+
+
 import random
 
 def gen_MedSector(arr, yStart, xStart):
+
+    sector = {
+        'origin': [yStart+10, xStart+10],
+        'layout': [],
+        'style': 'none'
+    }
 
     # Constants
     WALK_POINTS = []
@@ -10,20 +19,14 @@ def gen_MedSector(arr, yStart, xStart):
     GRID_COLS = GRID_SIZE
     GRID_ROWS = GRID_SIZE
 
-    # Colors
-    BLACK = (0, 0, 0)
-    GREY = (128, 128, 128)
-    LIGHT_GREY = (192, 192, 192)
-    RED = (192, 0, 0)
-
-    # Generate a 2D array to represent the dungeon grid
+    # Generate a 2D array to represent the sector grid
     medSector = [[None for _ in range(GRID_COLS)] for _ in range(GRID_ROWS)]
 
-    def roomBuilder(arr):
+    def roomBuilder(arr, dArr):
 
 
-        h = random.randrange(5, 20)
-        w = random.randrange(5, 20)
+        h = random.randrange(3, 10)
+        w = random.randrange(3, 10)
         longestDim = h
         if w > h:
             longestDim = w
@@ -36,8 +39,14 @@ def gen_MedSector(arr, yStart, xStart):
         WALK_POINTS.append([randStartI + centerI, randStartJ + centerJ])
 
         for i in range(randStartI, randStartI + h):
+            layRow = []
             for j in range(randStartJ, randStartJ + w):
                 arr[i][j] = 'floor'
+                dArr[yStart+i][xStart+j] = 'floor'
+                layRow.append(i)
+                layRow.append(j)
+
+            sector['layout'].append(layRow)
 
     def merge_coordinates(coordinates):
         # Sort the coordinates based on x values
@@ -54,7 +63,7 @@ def gen_MedSector(arr, yStart, xStart):
             x_distance = current_coord[1] - prev_coord[1]
             y_distance = current_coord[0] - prev_coord[0]
 
-            if abs(x_distance) <= 10 and abs(y_distance) <= 10:
+            if abs(x_distance) <= 5 and abs(y_distance) <= 5:
                 # If distances are less than or equal to 10, merge the coordinates at the halfway point
                 new_x = round((current_coord[1] + prev_coord[1]) / 2)
                 new_y = round((current_coord[0] + prev_coord[0]) / 2)
@@ -82,7 +91,7 @@ def gen_MedSector(arr, yStart, xStart):
                 #check distance between walking points
                 if j != i:
 
-                    if abs(arr[i][0] - arr[j][0]) < 25 and abs(arr[i][1] - arr[j][1]) < 25 and abs(arr[i][0] - arr[j][0]) > 15 and abs(arr[i][1] - arr[j][1]) > 15:
+                    if abs(arr[i][0] - arr[j][0]) > 5 and abs(arr[i][1] - arr[j][1]) > 5:
                         path = []
 
                         path.append([arr[i][0], arr[j][0]])
@@ -97,11 +106,9 @@ def gen_MedSector(arr, yStart, xStart):
 
         ###############################################################################
 
-
-
     # use spatial array with this func
     #     vvvvv
-    def walkPath(pths, spatial_array):
+    def walkPath(pths, spatial_array, dArr):
         for i in range(len(pths)):
 
 
@@ -121,12 +128,14 @@ def gen_MedSector(arr, yStart, xStart):
                         yStep -= 1
                         if spatial_array[yStep][xStep] != 'floor':
                             spatial_array[yStep][xStep] = 'floor'
+                            dArr[yStep+yStart][xStep+xStart] = 'floor'
                 if ya < yb:
 
                     if yStep > 1 and yStep < len(spatial_array):
                         yStep += 1
                         if spatial_array[yStep][xStep] != 'floor':
                             spatial_array[yStep][xStep] = 'floor'
+                            dArr[yStep+yStart][xStep+xStart] = 'floor'
 
             for x in range(abs(xa - xb)):
                 if xa > xb:
@@ -135,6 +144,7 @@ def gen_MedSector(arr, yStart, xStart):
                         xStep -= 1
                         if spatial_array[yStep][xStep] != 'floor':
                             spatial_array[yStep][xStep] = 'floor'
+                            dArr[yStep+yStart][xStep+xStart] = 'floor'
 
                 if xa < xb:
 
@@ -142,7 +152,7 @@ def gen_MedSector(arr, yStart, xStart):
                         xStep += 1
                         if spatial_array[yStep][xStep] != 'floor':
                             spatial_array[yStep][xStep] = 'floor'
-
+                            dArr[yStep+yStart][xStep+xStart] = 'floor'
 
     # Fill the dungeon grid with cells (wall, b1, floor)
     def fillWithBase(arr):
@@ -154,16 +164,15 @@ def gen_MedSector(arr, yStart, xStart):
     def generateRooms(num):
 
         for i in range(num):
-            roomBuilder(medSector)
-
+            roomBuilder(medSector, arr)
 
     def generateHalls():
 
         coords = WALK_POINTS
-        # origins = merge_coordinates(coords)
-        paths = checkPath(coords)
-        walkPath(paths, medSector)
-
+        origins = merge_coordinates(coords)
+        paths = checkPath(origins)
+        print(paths)
+        walkPath(paths, medSector, arr)
 
     ################################
 
@@ -173,8 +182,4 @@ def gen_MedSector(arr, yStart, xStart):
 
     #################################
 
-    return {
-        'origin':
-        'layout':
-        'style':
-    }
+    return sector

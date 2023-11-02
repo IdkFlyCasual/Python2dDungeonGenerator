@@ -1,13 +1,13 @@
+
+# main.py
+
 import pygame
-#import random
-import roomGen
-import mergeCoordsByDist
-import hallGen
+import random
 
-
+import medRoom
 
 # Constants
-GRID_SIZE = 20
+GRID_SIZE = 8
 GRID_WIDTH = 800
 GRID_HEIGHT = 800
 GRID_COLS = GRID_WIDTH // GRID_SIZE
@@ -26,25 +26,15 @@ screen = pygame.display.set_mode((GRID_WIDTH, GRID_HEIGHT))
 # Generate a 2D array to represent the dungeon grid
 dungeon = [[None for _ in range(GRID_COLS)] for _ in range(GRID_ROWS)]
 
-# Fill the dungeon grid with cells (wall, b1, floor)
 def fillWithBase(arr):
 
-    for row in range(GRID_ROWS):
-        for col in range(GRID_COLS):
-            arr[row][col] = 'e'
+        for row in range(GRID_ROWS):
+            for col in range(GRID_COLS):
+                arr[row][col] = 'e'
 
-def generateRooms(num):
-
-    for i in range(num):
-        roomGen.roomBuilder(dungeon)
-
-
-def generateHalls():
-
-    coords = roomGen.walkPoints
-    # origins = mergeCoordsByDist.merge_coordinates(coords)
-    paths = hallGen.checkPath(coords)
-    hallGen.walkPath(paths, dungeon)
+# def pasteSectors(spatArr, sectArr):
+#      for row in spatArr:
+#           for col in spatArr:
 
 
 # Draw the shit
@@ -67,13 +57,12 @@ def draw_elements():
 
 
 #####################################################################################################
-
-
 fillWithBase(dungeon)
-generateRooms(10)
-#roomGen.boolCleanup(dungeon)
-generateHalls()
+sector1 = medRoom.gen_MedSector(dungeon, random.randint(20, 80), random.randint(20, 80))
+
 draw_elements()
+#print(sector1)
+#print(dungeon)
 
 ######################################################################################################
 
