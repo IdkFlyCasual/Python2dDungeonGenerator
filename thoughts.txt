@@ -22,7 +22,7 @@ now lets back up code and try to make sure the rooms dont overlap
 ///////////////////   Adversity !!!!!    /////////////////////////
 time to find a way to draw halways between rooms
 
-also should find a way to measure and store the rooms as variables for various 
+also should find a way to measure and store the rooms as variables for various
 shit like style, scatter n such {might be harder than i thought}
 
 also should back this up before i enevitably break it.
@@ -32,10 +32,10 @@ also should back this up before i enevitably break it.
 
 /////////////////////////////    NOICE !!!    ////////////////////////////////////
 managed to get center coords of every room spawned
-now lets try to go through tha cor array and draw a line to nearest neihbor 
-coords. 
+now lets try to go through tha cor array and draw a line to nearest neihbor
+coords.
 
-hopfully ill be able to control it enough to keep 
+hopfully ill be able to control it enough to keep
 from ruining large rooms with islands or L corners
 
 managed to find some paths to draw. well see how this goes
@@ -56,7 +56,7 @@ are floor cells altering the array of points
 have the math figured out i think, the problem is crossing beams
 between loops and the maths...
 
-mayhaps if i clone the point array and remove from that one then join 
+mayhaps if i clone the point array and remove from that one then join
 the remaining with the new coords and finaly assign it to
 the origonal point array.
 
@@ -84,3 +84,9 @@ then have the basalisk make me a cleaned up version and
 do some learning comparing the changes at this point
 ill probably make a git repository... really need to start
 "keeping my garden green".
+
+
+////////////////////////////////// 11/2/23 /////////////////////////////////////
+
+
+ ditched the basalisk and started rethinking how i was doing things

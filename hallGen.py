@@ -15,19 +15,12 @@ def checkPath(arr):
     paths = []
     i = 0
     while i < len(arr) -1:
-        for j in range(i, len(arr)):
+        for j in range(len(arr)):
 
             #check distance between walking points
             if j != i:
-                # if abs(arr[i][0] - arr[j][0]) > 45 and abs(arr[i][1] - arr[j][1]) > 45:
-                #     path = []
 
-                #     path.append([arr[i][0], arr[j][0]])
-
-                #     path.append([arr[i][1], arr[j][1]])
-
-                #     paths.append(path)------
-                if abs(arr[i][0] - arr[j][0]) < 30 and abs(arr[i][1] - arr[j][1]) < 30 and abs(arr[i][0] - arr[j][0]) > 10 and abs(arr[i][1] - arr[j][1]) > 10:
+                if abs(arr[i][0] - arr[j][0]) < 25 and abs(arr[i][1] - arr[j][1]) < 25 and abs(arr[i][0] - arr[j][0]) > 15 and abs(arr[i][1] - arr[j][1]) > 15:
                     path = []
 
                     path.append([arr[i][0], arr[j][0]])
@@ -36,7 +29,7 @@ def checkPath(arr):
 
                     paths.append(path)
         i+=1
-    print(paths, '    ---->| PATHS')
+    # print(paths, '    ---->| PATHS')
     return paths
 
 
@@ -47,9 +40,8 @@ def checkPath(arr):
 # use spatial array with this func
 #     vvvvv
 def walkPath(pths, spatial_array):
-    roomExited = False
     for i in range(len(pths)):
-        
+
 
         ya = pths[i][0][0]
         yb = pths[i][0][1]
@@ -62,53 +54,29 @@ def walkPath(pths, spatial_array):
 
         for y in range(abs(ya - yb - 1)):
             if ya > yb:
-                
+
                 if yStep > 0 and yStep < len(spatial_array):
-                    yStep -= 1 
-                    if spatial_array[yStep][xStep] != 'c1':
-                        roomExited = True
-                        spatial_array[yStep][xStep] = 'c1'
-                        # ####
-                        # if spatial_array[yStep][xStep] == 'c1' and roomExited == True:
-                        #     roomExited = False
-                        #     break
-                        # ####
-            if ya < yb: 
-                
+                    yStep -= 1
+                    if spatial_array[yStep][xStep] != 'floor':
+                        spatial_array[yStep][xStep] = 'floor'
+            if ya < yb:
+
                 if yStep > 1 and yStep < len(spatial_array):
                     yStep += 1
-                    if spatial_array[yStep][xStep] != 'c1':
-                        roomExited = True
-                        spatial_array[yStep][xStep] = 'c1'
-                    # ####
-                    # if spatial_array[yStep][xStep] == 'c1' and roomExited == True:
-                    #     roomExited = False
-                    #     break
-                    # ####
+                    if spatial_array[yStep][xStep] != 'floor':
+                        spatial_array[yStep][xStep] = 'floor'
 
         for x in range(abs(xa - xb)):
-            if xa > xb: 
-               
-                if xStep > 0 and xStep < len(spatial_array[yStep]): 
+            if xa > xb:
+
+                if xStep > 0 and xStep < len(spatial_array[yStep]):
                     xStep -= 1
-                    if spatial_array[yStep][xStep] != 'c1':
-                        roomExited = True
-                        spatial_array[yStep][xStep] = 'c1'
-                    ####
-                    # if spatial_array[yStep][xStep] == 'c1' and roomExited == True:
-                    #     roomExited = False
-                    #     break
-                    ####
+                    if spatial_array[yStep][xStep] != 'floor':
+                        spatial_array[yStep][xStep] = 'floor'
+
             if xa < xb:
-                
+
                 if xStep > 0 and xStep < len(spatial_array[yStep]):
                     xStep += 1
-                    if spatial_array[yStep][xStep] != 'c1':
-                        roomExited = True
-                        spatial_array[yStep][xStep] = 'c1'
-                    ####
-                    # if spatial_array[yStep][xStep] == 'c1' and roomExited == True:
-                    #     roomExited = False
-                    #     break
-                    ####
-
+                    if spatial_array[yStep][xStep] != 'floor':
+                        spatial_array[yStep][xStep] = 'floor'

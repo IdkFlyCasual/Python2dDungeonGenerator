@@ -7,7 +7,7 @@ import hallGen
 
 
 # Constants
-GRID_SIZE = 8
+GRID_SIZE = 20
 GRID_WIDTH = 800
 GRID_HEIGHT = 800
 GRID_COLS = GRID_WIDTH // GRID_SIZE
@@ -26,7 +26,7 @@ screen = pygame.display.set_mode((GRID_WIDTH, GRID_HEIGHT))
 # Generate a 2D array to represent the dungeon grid
 dungeon = [[None for _ in range(GRID_COLS)] for _ in range(GRID_ROWS)]
 
-# Fill the dungeon grid with cells (a1, b1, c1)
+# Fill the dungeon grid with cells (wall, b1, floor)
 def fillWithBase(arr):
 
     for row in range(GRID_ROWS):
@@ -38,11 +38,12 @@ def generateRooms(num):
     for i in range(num):
         roomGen.roomBuilder(dungeon)
 
+
 def generateHalls():
 
     coords = roomGen.walkPoints
-    origins = mergeCoordsByDist.merge_coordinates(coords)
-    paths = hallGen.checkPath(origins)
+    # origins = mergeCoordsByDist.merge_coordinates(coords)
+    paths = hallGen.checkPath(coords)
     hallGen.walkPath(paths, dungeon)
 
 
@@ -53,12 +54,9 @@ def draw_elements():
             for col in range(GRID_COLS):
                 if dungeon[row][col] == 'e':
                     color = BLACK
-                if dungeon[row][col] == 'a1':
+                if dungeon[row][col] == 'wall':
                     color = GREY
-                if dungeon[row][col] == 'b1':
-                    #print('wall found in window')
-                    color = GREY
-                if dungeon[row][col] == 'c1':
+                if dungeon[row][col] == 'floor':
                     color = LIGHT_GREY
                 if dungeon[row][col] == 'wp':
                     print(' ---> walkpoint found at  > ', row, 'x', col)
@@ -72,9 +70,9 @@ def draw_elements():
 
 
 fillWithBase(dungeon)
-generateRooms(25)
+generateRooms(10)
+#roomGen.boolCleanup(dungeon)
 generateHalls()
-roomGen.hallCleanUp(dungeon)
 draw_elements()
 
 ######################################################################################################
@@ -82,7 +80,7 @@ draw_elements()
 # Main loop
 running = True
 while running:
-    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
