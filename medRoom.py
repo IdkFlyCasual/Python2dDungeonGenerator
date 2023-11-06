@@ -7,6 +7,7 @@ import random
 def gen_MedSector(arr, yStart, xStart):
 
     sector = {
+        'bound' : 10,
         'origin': [yStart+10, xStart+10],
         'layout': [],
         'style': 'none'
@@ -166,7 +167,7 @@ def gen_MedSector(arr, yStart, xStart):
         coords = WALK_POINTS
         origins = merge_coordinates(coords)
         paths = checkPath(origins)
-        print(paths)
+        #print(paths)
         walkPath(paths, medSector, arr)
 
     ################################

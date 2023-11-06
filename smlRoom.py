@@ -7,6 +7,7 @@ import random
 def gen_SmlSector(arr, yStart, xStart):
 
     sector = {
+        'bound' : 5,
         'origin': [yStart+5, xStart+5],
         'layout': [],
         'style': 'none'

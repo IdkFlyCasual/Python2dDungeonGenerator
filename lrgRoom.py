@@ -7,6 +7,7 @@ import random
 def gen_LrgSector(arr, yStart, xStart):
 
     sector = {
+        'bound' : 20,
         'origin': [yStart+20, xStart+20],
         'layout': [],
         'style': 'none'
@@ -171,7 +172,7 @@ def gen_LrgSector(arr, yStart, xStart):
         coords = WALK_POINTS
         origins = merge_coordinates(coords)
         paths = checkPath(origins)
-        print(paths)
+        #print(paths)
         walkPath(paths, lrgSector, arr)
 
     ################################
