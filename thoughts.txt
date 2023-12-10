@@ -15,10 +15,6 @@ problem!!!! :
     the sectors 'boundery' key is representative of the distance from the origin to
     the edges of a sector. ex: boundery = the sector's 2dArray's length / 2 (rounded)
 
-    consider that the function is a seperate file from the main file
-    and is called by a function "generateSectors(num)" in the main
-    file.
-
     when called the function should push the 'origin' and 'boundery'
     of the generated sector to seperate arrays and only place new sectors
     where they wont overlap pre existing sectors.
